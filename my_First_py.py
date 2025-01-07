@@ -1,31 +1,42 @@
 import argparse
 from datetime import datetime
+
 def parse_input():
     parser = argparse.ArgumentParser()
+
     parser.add_argument(
         '--bd',
-        type=lambda s: datetime.strptime(s, '%Y-%m-%d'),
+        type=str,
         required=True,
-        help= 'birthday of the user'     
+        help='Birthday of the user in YYYYMMDD format'
     )
-    
+
     parser.add_argument(
         '--name',
         type=str,
-        default="wuttichai",
-        help= 'input the name of people who are using the app' #เวลาคนต้องการดูว่าฟังก์ชั่นนี้ทำยังไงหรือคืออะไร     
+        default='wuttichai',
+        help='Input the name of the user'
     )
-   
+
     args = parser.parse_args()
     return args
 
 def printHello(who):
-    print(f"Hello world, {who}!!")
-def cal_todayVbd(bd):
-    td = datetime.today().strftime('%Y-%m-%d')
-    return bd-datetime(td)
+    print(f"Hello World!, {who}!!")
+
+def cal_days_since_birthday(bd):
+    today = datetime.today()
+    birth_date = datetime.strptime(bd, '%Y%m%d')
+
+    if birth_date > today:
+        raise ValueError("The birthday cannot be in the future!")
+
+    delta = today - birth_date
+    return delta.days
+
 if __name__ == "__main__":
-    input_V = parse_input()
-    print('this is my first .py file.')
-    printHello(input_V.name)
-    print(f'your birthday is {cal_todayVbd(input_V.bd)} from to day')
+    input_v = parse_input()
+    print('This is my first .py file.')
+    printHello(input_v.name)
+    days_since_birthday = cal_days_since_birthday(input_v.bd)
+    print(f'It has been {days_since_birthday} days since your birthday!')
