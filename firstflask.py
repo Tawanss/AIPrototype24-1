@@ -278,16 +278,32 @@ def helloSTAThtml():
     """
 
 ##api
-@app.route('/simpleAPI',methods=['POST'])
-def web_service_API_simple():
+# @app.route('/simpleAPI',methods=['POST'])
+# def web_service_API_simple():
 
-    payload = request.data.decode("utf-8")
-    inmessage = json.loads(payload)
+#     payload = request.data.decode("utf-8")
+#     inmessage = json.loads(payload)
 
-    print(inmessage)
+#     print(inmessage)
     
-    json_data = json.dumps({'y': 'received!'})
-    return json_data
+#     json_data = json.dumps({'y': 'received!'})
+#     return json_data
+@app.route('/simpleAPI', methods=['POST'])
+def web_service_API_simple():
+    try:
+        payload = request.data.decode("utf-8")
+        inmessage = json.loads(payload)
+        
+        sender = inmessage.get("sender", "Unknown")
+        message = inmessage.get("message", "No message")
+        timestamp = inmessage.get("timestamp", "No timestamp")
+        
+        print(f"Received message from {sender} at {timestamp}: {message}")
+        
+        response_data = {'status': 'received', 'sender': sender, 'timestamp': timestamp}
+        return json.dumps(response_data), 200
+    except Exception as e:
+        return json.dumps({'error': str(e)}), 400
 
 if __name__ == "__main__":   # run code 
     app.run(host='0.0.0.0',debug=True,port=5001)
