@@ -94,12 +94,4 @@ $cat {ชื่อไฟล์ / path file} ---> ไว้ใช้อ่าน 
 
 $rm
 
-## จัดการ minicoda
 
-$conda create --name <my-env>
-
-$conda create -n myenv <name of packger>
-
-$coda activate <my-env>
-
-$coda deactivate
