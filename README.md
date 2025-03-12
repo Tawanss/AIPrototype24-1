@@ -87,3 +87,19 @@ $conda create -n myenv <name of packger>
 $coda activate <my-env>
 
 $coda deactivate
+
+$mv {ชื่อไฟล์} {ที่ไหน} ---> ย้ายโฟเดอร์
+
+$cat {ชื่อไฟล์ / path file} ---> ไว้ใช้อ่าน ไฟล์ต่างๆ
+
+$rm
+
+## จัดการ minicoda
+
+$conda create --name <my-env>
+
+$conda create -n myenv <name of packger>
+
+$coda activate <my-env>
+
+$coda deactivate
